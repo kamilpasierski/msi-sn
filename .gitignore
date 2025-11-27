@@ -1,0 +1,15 @@
+# PyCharm
+.idea/
+
+# Python i środowisko wirtualne (Ważne!)
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Baza danych (zazwyczaj nie chcemy jej na repo)
+*.sqlite3
+db.sqlite3
+
+# Media (zdjęcia wrzucane przez userów)
+media/
