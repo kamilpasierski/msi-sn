@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Segregator ubrań AI</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #2c3e50; color: white; text-align: center; padding-top: 50px; }
+        .box { background-color: #34495e; width: 400px; margin: 0 auto; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h1 { margin-bottom: 30px; font-size: 24px; }
+        input[type="file"] { margin-bottom: 20px; }
+        button { background-color: #e74c3c; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; transition: 0.3s; }
+        button:hover { background-color: #c0392b; }
+        .result-box { margin-top: 30px; padding-top: 20px; border-top: 1px solid #7f8c8d; }
+        .prediction { font-size: 28px; font-weight: bold; color: #f1c40f; }
+        img { margin-top: 15px; max-width: 150px; border-radius: 5px; border: 2px solid #ecf0f1; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>Rozpoznawanie Ubrań</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" required>
+            <br>
+            <button type="submit">Sprawdź co to</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <p>Sztuczna Inteligencja twierdzi, że to:</p>
+            <div class="prediction">{{ result }}</div>
+            <p style="font-size: 12px; color: #bdc3c7;">Pewność: {{ confidence }}%</p>
+
+            <img src="{{ uploaded_file_url }}" alt="Twój plik">
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p style="color: #e74c3c; margin-top: 20px;">{{ error }}</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
